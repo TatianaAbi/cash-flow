@@ -1,15 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <!-- suspenses sirve para que un compoente con el atributo fallback se renderize primero hasta que nuestra pagina termine de cargar este desapareseria -->
+  <Suspense>
+    <template #default>
+      <HomeCasaVue />
+    </template>
+    <template #fallback>
+      <SplashScreenVue />
+    </template>
+  </Suspense>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineAsyncComponent } from "vue";
+import SplashScreenVue from "./components/Splash-screen.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    SplashScreenVue,
+    HomeCasaVue: defineAsyncComponent(
+      () =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(import("./components/Home-casa.vue"));
+          }, 2500);
+        })
+    ),
   },
 };
 </script>
