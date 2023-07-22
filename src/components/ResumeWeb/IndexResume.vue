@@ -1,10 +1,21 @@
 <template>
   <main>
     <p>{{ label }}</p>
-    <h1>{{ amountVisual }}</h1>
+    <h1>{{ amountCurrency }}</h1>
   </main>
+  <div class="graphic">
+    <slot name="graphic"></slot>
+  </div>
+  <div class="action">
+    <slot name="action"></slot>
+  </div>
 </template>
 <script>
+//esta funcion nos permite usar tipos de monedas
+const currencyFormater = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+});
 export default {
   props: {
     label: {
@@ -21,6 +32,9 @@ export default {
   computed: {
     amountVisual() {
       return this.amount !== null ? this.amount : this.totalAmount;
+    },
+    amountCurrency() {
+      return currencyFormater.format(this.amountVisual);
     },
   },
 };

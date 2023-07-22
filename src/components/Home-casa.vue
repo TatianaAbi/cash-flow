@@ -8,7 +8,10 @@
         :label="'ahorro total'"
         :total-amount="100000"
         :amount="amount"
-      />
+      >
+        <template #graphic> graphic </template>
+        <template #action> action </template>
+      </IndexResumeVue>
     </template>
 
     <template #movements>
