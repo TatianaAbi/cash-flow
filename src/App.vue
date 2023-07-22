@@ -18,6 +18,7 @@ export default {
   name: "App",
   components: {
     SplashScreenVue,
+    //nuestro componente home sera especial cuando el componente de carga se renderize el home se renderizara por atras por eso usamos una promesa
     HomeCasaVue: defineAsyncComponent(
       () =>
         new Promise((resolve) => {
@@ -31,12 +32,15 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,
+body,
+.app {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  --brand-green: #04b500;
+  --brand-blue: #0689b0;
 }
 </style>
