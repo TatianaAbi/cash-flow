@@ -2,13 +2,14 @@
   <main>
     <p>{{ label }}</p>
     <h1>{{ amountCurrency }}</h1>
+
+    <div class="graphic">
+      <slot name="graphic"></slot>
+    </div>
+    <div class="action">
+      <slot name="action"></slot>
+    </div>
   </main>
-  <div class="graphic">
-    <slot name="graphic"></slot>
-  </div>
-  <div class="action">
-    <slot name="action"></slot>
-  </div>
 </template>
 <script>
 //esta funcion nos permite usar tipos de monedas

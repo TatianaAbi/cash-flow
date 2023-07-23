@@ -26,7 +26,7 @@ const showMovements = ref(false);
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 14px;
+  padding: 14px 0;
 }
 .header {
   position: fixed;

@@ -10,24 +10,27 @@
         :amount="amount"
       >
         <template #graphic> graphic </template>
-        <template #action> action </template>
+        <template #action>
+          <ActionBtnVue />
+        </template>
       </IndexResumeVue>
     </template>
 
     <template #movements>
-      <MovementsOneVue />
+      <MovementsOneVue :movements="movements" />
     </template>
   </LayoutDeLogoVue>
 </template>
 <script>
-//import Resume from "./Resume/Index1.vue";
+import ActionBtnVue from "./ActionBtn.vue";
 import HeaderSeccionVue from "./HeaderSeccion.vue";
 import LayoutDeLogoVue from "./LayoutDeLogo.vue";
-import MovementsOneVue from "./MovementsOne.vue";
+import MovementsOneVue from "./Movements/MovementsOne.vue";
 import IndexResumeVue from "./ResumeWeb/IndexResume.vue";
 
 export default {
   components: {
+    ActionBtnVue,
     LayoutDeLogoVue,
     HeaderSeccionVue,
     MovementsOneVue,
@@ -36,6 +39,33 @@ export default {
   data() {
     return {
       amount: null,
+      movements: [
+        {
+          id: 0,
+          title: "Movimiento 1",
+          description: "lorem ips is la sit met flo rui",
+          amount: 1000,
+        },
+        {
+          id: 1,
+          title: "Movimiento 2",
+          description: "lorem ips is la sit met flo rui",
+          amount: 1000,
+        },
+        {
+          id: 2,
+
+          title: "Movimiento 3",
+          description: "lorem ips is la sit met flo rui",
+          amount: 1000,
+        },
+        {
+          id: 3,
+          title: "Movimiento 4",
+          description: "lorem ips is la sit met flo rui",
+          amount: 1000,
+        },
+      ],
     };
   },
 };
