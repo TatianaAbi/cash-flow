@@ -9,7 +9,9 @@
         :total-amount="100000"
         :amount="amount"
       >
-        <template #graphic> graphic </template>
+        <template #graphic>
+          <GraphicMoneyVue />
+        </template>
         <template #action>
           <ActionBtnVue />
         </template>
@@ -27,7 +29,7 @@ import HeaderSeccionVue from "./HeaderSeccion.vue";
 import LayoutDeLogoVue from "./LayoutDeLogo.vue";
 import MovementsOneVue from "./Movements/MovementsOne.vue";
 import IndexResumeVue from "./ResumeWeb/IndexResume.vue";
-
+import GraphicMoneyVue from "./ResumeWeb/GraphicMoney.vue";
 export default {
   components: {
     ActionBtnVue,
@@ -35,6 +37,7 @@ export default {
     HeaderSeccionVue,
     MovementsOneVue,
     IndexResumeVue,
+    GraphicMoneyVue,
   },
   data() {
     return {
