@@ -42,35 +42,58 @@ export default {
   data() {
     return {
       amount: null,
-      amounts: [100, 200, 500, 200, -400, -600, -300, 0, 500],
       movements: [
         {
           id: 0,
           title: "Movimiento 1",
           description: "lorem ips is la sit met flo rui",
-          amount: 1000,
+          amount: 100,
+          time: new Date("02-01-2022"),
         },
         {
           id: 1,
           title: "Movimiento 2",
           description: "lorem ips is la sit met flo rui",
-          amount: 1000,
+          amount: 200,
+          time: new Date("02-01-2022"),
         },
         {
           id: 2,
 
           title: "Movimiento 3",
           description: "lorem ips is la sit met flo rui",
-          amount: 1000,
+          amount: 500,
+          time: new Date("01-01-2022"),
         },
         {
           id: 3,
           title: "Movimiento 4",
           description: "lorem ips is la sit met flo rui",
-          amount: 1000,
+          amount: 200,
+          time: new Date("01-01-2022"),
         },
       ],
     };
+  },
+  computed: {
+    amounts() {
+      const lastDays = this.movements
+        .filter((m) => {
+          const today = new Date();
+          const oldDate = today.setDate(today.getDate() - 30);
+
+          return m.time > oldDate;
+        })
+        .map((m) => m.amount);
+
+      return lastDays.map((m, i) => {
+        const lastMovements = lastDays.slice(0, i);
+
+        return lastMovements.reduce((suma, movement) => {
+          return suma + movement;
+        }, 0);
+      });
+    },
   },
 };
 </script>
