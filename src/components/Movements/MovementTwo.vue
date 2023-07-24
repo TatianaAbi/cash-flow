@@ -6,7 +6,7 @@
     </div>
     <div class="action">
       <img src="@/assets/trash-icon.svg" alt="borrar" @click="remove" />
-      <p :class="[{ red: isNegative, green: !isNegative }]">
+      <p :class="{ red: isNegative, green: !isNegative }">
         {{ amountCurrency }}
       </p>
     </div>

@@ -2,7 +2,7 @@
   <button @click="showModal = true">agregar movimiento</button>
   <teleport to="#app">
     <ModalHistoryVue v-show="showModal" @close="showModal = false">
-      <form @sumit.prevent="submit">
+      <form @submit.prevent="submit">
         <div class="field">
           <label>titulo</label>
           <input type="text" v-model="title" />
@@ -18,7 +18,7 @@
         <div class="field">
           <label>Tipo de movimiento</label>
           <label class="radio-label">
-            <input type="radio" v-model="movementType" value="ingreso" />
+            <input type="radio" v-model="movementType" value="Ingreso" />
             <span>ingreso</span>
           </label>
           <label class="radio-label">
@@ -34,15 +34,29 @@
   </teleport>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
 import ModalHistoryVue from "./ModalHistory.vue";
 const showModal = ref(false);
 const title = ref("");
 const amount = ref(0);
-const movementType = ref("ingreso");
+const movementType = ref("Ingreso");
+const description = ref("");
+
+const emit = defineEmits(["create"]);
 
 const submit = () => {
   showModal.value = !showModal.value;
+  emit("create", {
+    title: title.value,
+    description: description.value,
+    amount: movementType.value === "Ingreso" ? amount.value : -amount.value,
+    time: new Date(),
+    id: new Date(),
+  });
+  title.value = "";
+  description.value = "";
+  amount.value = 0;
+  movementType.value = "Ingreso";
 };
 </script>
 

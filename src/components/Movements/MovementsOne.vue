@@ -10,15 +10,13 @@
         :description="description"
         :amount="amount"
         @remove="remove"
-      >
-        {{ movement.title }}
-      </MovementTwoVue>
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, toRefs } from "vue";
+import { defineProps, toRefs, defineEmits } from "vue";
 import MovementTwoVue from "./MovementTwo.vue";
 const props = defineProps({
   movements: {
@@ -29,8 +27,9 @@ const props = defineProps({
 });
 
 const { movements } = toRefs(props);
+const emit = defineEmits(["remove"]);
 const remove = (id) => {
-  console.log("remove", id);
+  emit("remove", id);
 };
 </script>
 
