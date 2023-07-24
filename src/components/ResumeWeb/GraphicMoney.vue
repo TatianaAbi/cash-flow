@@ -1,6 +1,11 @@
 <template>
   <div>
-    <svg viewBox="0 0 300 200">
+    <svg
+      @touchstart="tap"
+      @touchmove="tap"
+      @touchend="untap"
+      viewBox="0 0 300 200"
+    >
       <line
         stroke="#c4c4c4"
         stroke-width="2"
@@ -16,11 +21,12 @@
         :points="points"
       />
       <line
+        v-show="showPointer"
         stroke="#04b500"
         stroke-witdh="2"
-        x1="200"
+        :x1="pointer"
         y1="0"
-        x2="200"
+        :x2="pointer"
         y2="200"
       />
     </svg>
@@ -28,7 +34,7 @@
   </div>
 </template>
 <script setup>
-import { defineProps, toRefs, computed } from "vue";
+import { defineProps, toRefs, computed, ref } from "vue";
 const props = defineProps({
   amounts: {
     type: Array,
@@ -36,6 +42,7 @@ const props = defineProps({
   },
 });
 const { amounts } = toRefs(props);
+
 const amountToPixels = (amount) => {
   const min = Math.min(...amounts.value);
   const max = Math.max(...amounts.value);
@@ -51,14 +58,28 @@ const zero = computed(() => {
 const points = computed(() => {
   const total = amounts.value.length;
 
-  return Array(total)
-    .fill(100)
-    .reduce((points, amount, i) => {
-      const x = (300 / total) * (i + 1);
-      const y = amountToPixels(amount);
-      return `${points} ${x},${y}`;
-    }, "0,100");
+  return amounts.value.reduce((points, amount, i) => {
+    const x = (300 / total) * (i + 1);
+    const y = amountToPixels(amount);
+    return `${points} ${x},${y}`;
+  }, "0,100");
 });
+
+const showPointer = ref(false);
+
+const pointer = ref(0);
+
+const tap = ({ target, touches }) => {
+  showPointer.value = true;
+  const elementWidth = target.getBoundingClientRect().width;
+  const elementX = target.getBoundingClientRect().x;
+  const touchX = touches[0].clientX;
+  pointer.value = ((touchX - elementX) * 300) / elementWidth;
+};
+
+const untap = () => {
+  showPointer.value = false;
+};
 </script>
 
 <style scoped>
