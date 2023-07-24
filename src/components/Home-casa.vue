@@ -10,7 +10,7 @@
         :amount="amount"
       >
         <template #graphic>
-          <GraphicMoneyVue />
+          <GraphicMoneyVue :amounts="amounts" />
         </template>
         <template #action>
           <ActionBtnVue />
@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       amount: null,
+      amounts: [100, 200, 500, 200, -400, -600, -300, 0, 500],
       movements: [
         {
           id: 0,
